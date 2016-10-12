@@ -1,4 +1,10 @@
-76-429 Introduction to Digital Humanities F16
+A course project for 76-429 Introduction to Digital Humanities F16
 
-Course Project
+James Joyce Bot
 
+Participants: 
+Kanika Bhandari
+Stephen Epple
+Anna Posbergh
+Craig Stamm
+Skye Toor

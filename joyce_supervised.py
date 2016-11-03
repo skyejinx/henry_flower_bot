@@ -85,10 +85,10 @@ def getSentThings(sentences): #we need to use a list here
 	#it might be useful to plot those things here
 	return
 
-def getUser(user_shit): 
-	user_shit = set(user_shit)
+def getUser(user_input): 
+	user_shit = set(user_input)
 	count = dict()
-	tags = tag(user_shit, tokenize=True, encoding='utf-8')
+	tags = tag(user_input, tokenize=True, encoding='utf-8')
 	for t in tags: 
 		count[t[0]] = t[1]
 
@@ -98,11 +98,11 @@ def getUser(user_shit):
 
 	return None
 
-def doWeird(user_shit, rules_binaries): 
+def doWeird(user_input, rules_binaries): 
 	return None
 
-def main(corpus, user_shit): 
-#	user = getUser(user_shit)
+def main(corpus, user_input): 
+#	user = getUser(user_input)
 	with open(corpus, 'r') as c: 
 		corp = c.readlines()
 		print type(corp)
@@ -123,7 +123,6 @@ def main(corpus, user_shit):
 		print sample, type(sample)
 		getCounts(corp, s)
 
-		return 
 		#ideally, this returns a binary of {RULE: 0, RULE:1}
 
 	#if all these things happen 
@@ -132,6 +131,6 @@ def main(corpus, user_shit):
 
 	return None
 
-corpus = 'C:/Users/skyet/OneDrive/CMU/76-429DigitalHumanities/James_Joyce_Is_Bonkers/test_corpus.txt'
-user_shit = "You have to wake up. You have an exam in 10 minutes."
-main(corpus, user_shit)
+corpus = 'PATH TO CORPUS'
+user_input = "You have to wake up. You have an exam in 10 minutes."
+main(corpus, user_input)

@@ -24,7 +24,7 @@ from pattern.en import Sentence
 import random
 
 
-input = 'The fox and the hound'
+input = 'The wonderous wizard sternly summoned the magic fox.'
 # parse input into Text object
 text = parsetree(input, relations = True, lemmata=True)
 
@@ -54,11 +54,20 @@ for sentence in text:
         print chunk.head.string
 
 
+
 #  pre: takes a pattern sentence object
 # post: returns a simple subject (random if multiple)
-def getSubject(sentence):
+def getSimpleSubject(sentence):
     if sentence.subjects:
         return random.choice(sentence.subjects).head.string
+    else:
+        return None
+
+#  pre: takes a pattern sentence object
+# post: returns the entire noun phrase as subject (random if multiple)
+def getNounPhraseSubject(sentence):
+    if sentence.subjects:
+        return random.choice(sentence.subjects).string
     else:
         return None
 
@@ -78,10 +87,33 @@ def getObject(sentence):
     else:
         return None
 
+#  pre: takes a pattern sentence object
+# post: returns a list of adjectives from the sentence
+def getAdjectives(sentence):
+    adjectives = []
+    for word in sentence:
+            if word.type == 'JJ':
+                adjectives.append(word.string)
+    return adjectives
+
+#  pre: takes a pattern sentence object
+# post: returns a list of adverbs from the sentence
+def getAdverbs(sentence):
+    adverbs = []
+    for word in sentence:
+        if word.type == 'RB':
+            adverbs.append(word.string)
+    return adverbs
+
 
 print '\nPrint function outputs...'
-print 'Subject: ', getSubject(text[0])
-print 'Verb: ', getVerb(text[0])
-print 'Object: ', getObject(text[0])
+print "Simple Subject: " + getSimpleSubject(text[0])
+print "Noun Phrase Subject: " + getNounPhraseSubject(text[0])
+print "Verb: " + getVerb(text[0])
+print "Object: " + getObject(text[0])
+print "Adjectives: "
+print getAdjectives(text[0])
+print "Adverbs: "
+print getAdverbs(text[0])
 
 

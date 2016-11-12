@@ -7,10 +7,6 @@ import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from pattern.en import parsetree, PNPChunk, tag
 
-#HOW THE FUCK DO I GET SUBJECT AND OBJECT? 
-#from spacy.en import English
-#parser = English()
-#from subject_object_extraction import findSVOs????
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -61,9 +57,19 @@ def getCounts(corpus, s): #here we want to get pos counts
 
 	#what are the pos that we care about? 
 	#print count
+	adjs, nouns = [], []
+	count = dict()
+	tags = tag(corpus, tokenize = True, encoding = 'utf-8')
+	for tag in tags: 
+		count[t[0]] = t[1]
+		if t[1] == u'JJ': 
+			adjs.append(t[0])
+		elif t[1] == 'NN' or 'NPP' or 'NNPS' or 'NNP-LOC': 
+			nouns.append(t[0])
+
+	print random.choice(adjs), random.choice(nouns)
 	pos = Counter(count.values())
-	print len(pos)
-	print pos.most_common()
+	print "Parts of speech counts: ", pos.most_common()
 
 	#we saved the number of sentences (s)
 	#so we can count how many of each pos are in each sentence if we need to
@@ -86,6 +92,8 @@ def getSentThings(sentences): #we need to use a list here
 	return
 
 def getUser(user_input): 
+	#This is what we want: 
+	#https://foxtype.com/sentence-tree
 	user_shit = set(user_input)
 	count = dict()
 	tags = tag(user_input, tokenize=True, encoding='utf-8')
@@ -98,14 +106,11 @@ def getUser(user_input):
 
 	return None
 
-def doWeird(user_input, rules_binaries): 
-	return None
-
 def main(corpus, user_input): 
 #	user = getUser(user_input)
 	with open(corpus, 'r') as c: 
+		#For now -- I think we have to do it this way for Rich Text Format reasons
 		corp = c.readlines()
-		print type(corp)
 		for i in xrange(0, len(corp)): 
 			corp[i] = corp[i].replace('\n', '')
 			corp[i] = corp[i].replace('\xe2', '')

@@ -1,6 +1,6 @@
 A course project for 76-429 Introduction to Digital Humanities F16
 
-James Joyce Bot
+##James Joyce Bot
 
 Folders: 
 * Corpus : Joyce novels and letters from Project Guettenberg and Google Books
